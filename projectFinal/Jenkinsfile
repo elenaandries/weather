@@ -1,27 +1,18 @@
 pipeline {
-    agent {any}
-    stages {
-        stage('build') {
-            steps {
-               echo 'Building..'
-            }
-        }
-        stage('Test') {
-            steps {
-                echo 'Testing..'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
-            }
-        }
+    agent { label 'linux' }
+    tools {
+        maven 'apache-maven-3.0.5'
     }
-    
-    post {
-        always {
-            echo 'One way or another, I have finished'
-            deleteDir() /* clean up our workspace */
+    stages {
+        stage('checkout') {
+            steps {
+                git 'https://github.com/elenaandries/weather.git'
+            }
+        }
+        stage('Build') {
+            steps {
+                sh 'mvn clean compile'       
+            }
         }
     }
 }
