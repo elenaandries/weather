@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('checkout') {
             steps {
-                git 'https://github.com/elenaandries/weather/tree/master/projectFinal'
+                git 'https://github.com/elenaandries/weather.git'
             }
         }
         stage('Build') {
