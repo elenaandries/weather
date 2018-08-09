@@ -1,9 +1,17 @@
 pipeline {
-    agent { docker { image 'maven:3.3.3' } }
+    agent { label 'linux' }
+    tools {
+        maven 'Maven 3.0.5'
+    }
     stages {
-        stage('build') {
+        stage('checkout') {
             steps {
-                sh 'mvn --version'
+                git 'https://github.com/elenaandries/weather.git'
+            }
+        }
+        stage('Build') {
+            steps {
+                       
             }
         }
     }
